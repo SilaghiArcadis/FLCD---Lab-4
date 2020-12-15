@@ -29,38 +29,38 @@ BNF
 CFG
 
 G = (N, ∑, P, S)
-N ={break statement,finally,throws,if,label,goto,decllist,declaration,type1,arraydec1,type
-    cmpdstmt,stmtlist,stmt,simplstmt,expression,term,factor,iostmt,structstmt,ifstmt,whilestmt,
-    smthwhile,for,condition}
+N ={BREAK STATEMENT,FINALLY,THROWS,IF,LABEL,GOTO,DECLLIST,DECLARATION,TYPE1,ARRAYDEC1,TYPE
+    CMPDSTMT,STMTLIST,STMT,SIMPLSTMT,EXPRESSION,TERM,FACTOR,IOSTMT,STRUCTSTMT,IFSTMT,WHILESTMT,
+    SMTHWHILE,FOR,CONDITION}
 Σ = {break,throws,else,if,string,goto,end,indentifier,expression,begin,end,read,write,then,wile,do,relation
      boolean,char,integer,real,binary,array,nr,of,end}
 
 P:
 
-break statement -> break identifier
-finally -> finally block
-throws -> throws class type list
-if -> if expression block "{" elif expresssion block "}" "{"else block "}"
-label -> string
-goto -> goto label
-decllist -> declaration | declaration decllist
-declaration -> IDENTIFIER type
-type1 -> BOOLEAN | CHAR | INTEGER | REAL | BINARY
-arraydec1 -> ARRAY "[" nr "]"  OF type1
-type -> type1 | arraydec1
-cmpdstmt -> BEGIN stmtlist END
-stmtlist -> stmt | stmt ";" stmtlist
-stmt -> simplstmt | structstmt
-simplstmt -> assignstmt | iostmt
-expression -> expression "+" term | term
-term -> term * factor | factor
-factor -> "(" expression ")" | IDENTIFIER
-iostmt -> READ "(" IDENTIFIER ")" | WRITE "(" IDENTIFIER ")"
-structstmt -> cmpdstmt | ifstmt | whilestmt
-ifstmt -> IF condition THEN stmt "{" ELSE stmt "}"
-whilestmt -> WHILE condition DO stmt
-smtwhile -> DO stmt WHILE condition
-for -> "[" expression "]" , expression, "[" expression "]" , block
-condition -> expression RELATION expression
+BREAK STATEMENT -> break identifier
+FINALLY -> finally block
+THROWS -> throws class type list
+IF -> if expression block { elif expresssion block } { else block }
+LABEL -> string
+GOTO -> goto label
+DECLLIST -> declaration | declaration decllist
+DECLARATION -> IDENTIFIER type
+TYPE1 -> BOOLEAN | CHAR | INTEGER | REAL | BINARY
+ARRAYDEC1 -> ARRAY [ nr ]  OF type1
+TYPE -> type1 | arraydec1
+CMPDSTM -> BEGIN stmtlist END
+STMTLIST -> stmt | stmt stmtlist
+STMT -> simplstmt | structstmt
+SIMPLSTM -> assignstmt | iostmt
+EXPRESSION -> expression + term | term
+TERM -> term * factor | factor
+FACTOR -> ( expression ) | IDENTIFIER
+IOSTMT -> READ ( IDENTIFIER ) | WRITE ( IDENTIFIER )
+STRUCTSTMT -> cmpdstmt | ifstmt | whilestmt
+IFSTMT -> IF condition THEN stmt { ELSE stmt }
+WHILESTMT -> WHILE condition DO stmt
+SMTWHILE -> DO stmt WHILE condition
+FOR -> "[" expression ] , expression, [ expression ] , block
+CONDITION -> expression RELATION expression
 
 S -> P
