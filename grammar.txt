@@ -1,0 +1,66 @@
+BNF
+
+<break statement> ::= break <identifier>
+<finally> ::= finally <block> 
+<throws> ::= throws <class type list>
+<if> ::= if <expression> <block> {elif <expression> <block>} [else <block>] 
+<label> ::= string
+<goto> ::= goto <label>
+<decllist> ::= declaration | declaration <decllist>
+<declaration> ::= IDENTIFIER type
+<type1> ::= “BOOLEAN” | “CHAR” | “INTEGER” | “REAL” | “BINARY”
+<arraydecl> ::= “ARRAY” “[“ nr “]” “OF” type1
+<type> ::= type1|<arraydecl>
+<cmpdstmt> ::= “BEGIN” <stmtlist? “END”
+<stmtlist> ::= <stmt> | <stmt> “;” <stmtlist>
+<stmt> ::= <simplstmt> | <structstmt>
+<simplstmt> ::= <assignstmt> | <iostmt>
+<expression> ::= <expression> “+” <term> | <term>
+<term> ::= <term> “*” <factor> | <factor>
+<factor> ::= “(“ expression “)” | IDENTIFIER
+<iostmt> ::= “READ” (“IDENTIFIER”) | “WRITE” “(“ IDENTIFIER “)”
+<structstmt> ::= <cmpdstmt> | <ifstmt> | <whilestmt>
+<ifstmt> ::= “IF” condition “THEN” stmt [“ELSE” stmt]
+<whilestmt> ::= “WHILE” condition “DO” <stmt>
+<smthwhile> ::= “DO” stmt “WHILE” condition
+<for> ::= [<expression>] ‘,’ <expression> ‘,’ [<expression>] <block> 
+<condition> ::= <expression> RELATION <expression>
+
+CFG
+
+G = (N, ∑, P, S)
+N ={break statement,finally,throws,if,label,goto,decllist,declaration,type1,arraydec1,type
+    cmpdstmt,stmtlist,stmt,simplstmt,expression,term,factor,iostmt,structstmt,ifstmt,whilestmt,
+    smthwhile,for,condition}
+Σ = {break,throws,else,if,string,goto,end,indentifier,expression,begin,end,read,write,then,wile,do,relation
+     boolean,char,integer,real,binary,array,nr,of,end}
+
+P:
+
+break statement -> break identifier
+finally -> finally block
+throws -> throws class type list
+if -> if expression block "{" elif expresssion block "}" "{"else block "}"
+label -> string
+goto -> goto label
+decllist -> declaration | declaration decllist
+declaration -> IDENTIFIER type
+type1 -> BOOLEAN | CHAR | INTEGER | REAL | BINARY
+arraydec1 -> ARRAY "[" nr "]"  OF type1
+type -> type1 | arraydec1
+cmpdstmt -> BEGIN stmtlist END
+stmtlist -> stmt | stmt ";" stmtlist
+stmt -> simplstmt | structstmt
+simplstmt -> assignstmt | iostmt
+expression -> expression "+" term | term
+term -> term * factor | factor
+factor -> "(" expression ")" | IDENTIFIER
+iostmt -> READ "(" IDENTIFIER ")" | WRITE "(" IDENTIFIER ")"
+structstmt -> cmpdstmt | ifstmt | whilestmt
+ifstmt -> IF condition THEN stmt "{" ELSE stmt "}"
+whilestmt -> WHILE condition DO stmt
+smtwhile -> DO stmt WHILE condition
+for -> "[" expression "]" , expression, "[" expression "]" , block
+condition -> expression RELATION expression
+
+S -> P
